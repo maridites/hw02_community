@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}
+    {{title}}
+{% endblock %}
+{% block content %}
+  <h1>{{ group }}</h1>
+  <p>{{ group.description }}</p>
+  <hr>
+  <main>
+    {% for post in posts %}
+    <div class="card mb-3 mt-1 shadow-sm">
+      <div class="card-body">
+        <p class="card-text">
+            <strong class="d-block text-gray-dark">
+              <h5>
+                Автор: {{ post.author.get_full_name }}
+              </h5>
+            </strong>
+          </a>
+        </p>
+        <article>
+        <p>
+          {{ post.text|linebreaksbr }}
+        </p>
+        </article>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="btn-group">
+            {% if not forloop.last %}<hr>{% endif %}
+          </div>
+          <small class="text-muted">Дата публикации: {{ post.pub_date|date:"d M Y" }}</small>
+        </div>
+      </div>
+    </div>
+    {% endfor %}    
+</main>
+{% endblock %}
