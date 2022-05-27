@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Post, Group
 
-
+@admin.register(Group, Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = (
         'pk',
@@ -19,7 +19,3 @@ class PostAdmin(admin.ModelAdmin):
 class GroupAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'description')
     empty_value_display = '-пусто-'
-
-
-admin.site.register(Post, PostAdmin)
-admin.site.register(Group, GroupAdmin)
