@@ -3,17 +3,24 @@
     {{title}}
 {% endblock %}
 {% block content %}
-  <p>{{ group.description }}</p>
+  
   <hr>
   <main>
+    <h1>{{ group.title }}</h1>
+    <p>{{ group.description }}</p>
     {% for post in posts %}
     <div class="card mb-3 mt-1 shadow-sm">
       <div class="card-body">
         <p class="card-text">
             <strong class="d-block text-gray-dark">
-              <h5>
+              <ul>
+              <li>
                 Автор: {{ post.author.get_full_name }}
-              </h5>
+              </li>
+              <li>
+                Дата публикации: {{ post.pub_date|date:"d M Y" }}
+              </li>
+            </ul>
             </strong>
           </a>
         </p>
@@ -26,7 +33,6 @@
           <div class="btn-group">
             {% if not forloop.last %}<hr>{% endif %}
           </div>
-          <small class="text-muted">Дата публикации: {{ post.pub_date|date:"d M Y" }}</small>
         </div>
       </div>
     </div>
