@@ -29,6 +29,7 @@ class Post(models.Model):
         verbose_name='Группа поста',
         related_name='posts'
     )
+    
     class Meta:
         ordering = ['-pub_date']
 
