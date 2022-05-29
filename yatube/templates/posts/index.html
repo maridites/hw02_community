@@ -14,7 +14,7 @@
           Дата публикации: {{ post.pub_date|date:"d E Y" }}
         </li>
       </ul>
-      <p>{{ post.text }}</p>
+      <p>{{ post.text|linebricks }}</p>
       {% if post.group %}
         <p>
           <a href="{% url 'posts:group_list' post.group.slug %}">Последние записи сообщества - {{post.group}}</a>
