@@ -2,9 +2,6 @@ from django.shortcuts import get_object_or_404, render
 from .models import Post, Group
 
 
-LIMIT_POST: int = 10
-
-
 def index(request):
     post_list = Post.objects.select_related('author').all()
     context = {
