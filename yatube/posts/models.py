@@ -8,7 +8,6 @@ class Group(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
     description = models.TextField()
-    id = models.AutoField(primary_key=True)
 
     def __str__(self):
         return (self.title[:20])
@@ -30,7 +29,6 @@ class Post(models.Model):
         verbose_name='Группа поста',
         related_name='posts'
     )
-    id = models.AutoField(primary_key=True)
 
     def __str__(self):
         return (self.text[:30])
