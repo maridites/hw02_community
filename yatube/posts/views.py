@@ -2,23 +2,22 @@ from django.shortcuts import get_object_or_404, render
 from .models import Post, Group
 
 
+LIMIT_POST: int = 10
+
+
 def index(request):
-    posts = Post.objects.order_by('-pub_date')[:10]
-    title = 'Последние обновления на сайте'
+    post_list = Post.objects.select_related('author').all()
     context = {
-        'posts': posts,
-        'title': title,
+        'posts': post_list,
     }
     return render(request, 'posts/index.html', context)
 
 
 def group_list(request, slug):
     group = get_object_or_404(Group, slug=slug)
-    posts = Post.objects.filter(group=group).order_by('-pub_date')[:10]
-    title = f'Записи сообщества {group}'
+    post_list = group.posts.select_related('author').all()
     context = {
         'group': group,
-        'posts': posts,
-        'title': title,
+        'posts': post_list,
     }
     return render(request, 'posts/group_list.html', context)
