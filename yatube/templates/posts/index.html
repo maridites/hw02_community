@@ -1,47 +1,28 @@
-<!DOCTYPE html>
-<html lang="ru">
 {% extends 'base.html' %}
-{% load static %}
 {% block title %}
-  Последние обновления на сайте
+  Начальная страница
 {% endblock %}
-
 {% block content %}
-  <main>
-
-    <div class="container py-5">
-      <h1>Последние обновления на сайте</h1>
-      {% for post in posts %}
-     <div class="card mb-3 mt-1 shadow-sm">
-     <div class="card-body">
-      <p class="card-text">
-            <strong class="d-block text-gray-dark">
-              <ul>
-                <li>
-                  Автор: {{ post.author.get_full_name }}
-                </li>
-                <li>
-                  Дата публикации: {{ post.pub_date|date:"d M Y" }}
-                </li>
-              </ul>
-            </strong>
-          </a>
-        </p>
-        <article>
-        <p>
-          {{ post.text|linebreaksbr }}
-        </p>
-        </article>
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="btn-group">
-              {% if post.group %}
-                <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
-              {% endif %}
-            {% if not forloop.last %}<hr>{% endif %}
-          </div>
-        </div>
-      </div>
-    </div>
-    {% endfor %}    
-</main>
-{%endblock%}
+  <div class="container py-5">
+    <h1>Последние обновления на сайте</h1>
+      <article>
+        {% for post in page_obj %}
+          <ul>
+            <li>
+              Автор: {{ post.author.get_full_name }}
+            </li>
+            <li>
+              Дата публикации: {{ post.pub_date|date:"d E Y" }}
+            </li>
+          </ul>
+          <p>{{ post.text|linebreaks }}</p>
+          {% if post.group %}
+          <p> 
+            <a href="{% url 'posts:group_list' post.group.slug %}">Последние записи сообщества - {{post.group}}</a>
+          </p> 
+          {% endif %}
+          {% if not forloop.last %}<hr>{% endif %}
+        {% endfor %}
+      </article>
+  </div>
+{% endblock %}
