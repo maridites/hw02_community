@@ -8,4 +8,8 @@
     </li>
   </ul>
   <p>{{ post.text|linebreaks }}</p>
+    {% if group_button%}
+    href="{% url 'posts:group_list' post.group.slug %}
+    ">Последние записи сообщества - {{post.group}}
+  {% endif %}
 </article>
