@@ -6,6 +6,7 @@ def index(request):
     post_list = Post.objects.select_related('author').all()
     context = {
         'posts': post_list,
+        'group_button': True
     }
     return render(request, 'posts/index.html', context)
 
