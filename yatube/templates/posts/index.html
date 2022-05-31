@@ -7,5 +7,9 @@
   {% for post in posts %}
   {% include 'includes/article.html' %}
     {% if not forloop.last %}<hr>{% endif %}
+    {% if group_button%}
+      href="{% url 'posts:group_list' post.group.slug %}
+      ">Последние записи сообщества - {{post.group}}
+    {% endif %}
   {% endfor %}
 {% endblock %}
